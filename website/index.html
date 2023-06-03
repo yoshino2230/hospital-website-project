@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hospital Website</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>Sancarlos City Hospital</h1>
+		<nav>
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">Contact Us</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<section>
+			<h2>Welcome to our Hospital</h2>
+			<p>life is shor so live a healty life</p>
+		</section>
+		<section>
+			<h2>About Us</h2>
+			<p>life is short so live a healty life</p>
+		</section>
+		<section>
+			<h2>Our Services</h2>
+			<ul>
+				<li>Emergency Care</li>
+				<li>Inpatient Care</li>
+				<li>Outpatient Care</li>
+				<li>Specialty Clinics</li>
+			</ul>
+		</section>
+		<section>
+			<h2>Contact Us</h2>
+			<p>sancarlos city hospital state ZIP 6127</p>
+			<p>Phone: 00000000000</p>
+			<p>Email: sancarlosHospital@gmail.com</p>
+		</section>
+	</main>
+	<footer>
+		<p>&copy; 2023 Hospital Name. All Rights Reserved.</p>
+	</footer>
+	<html>
+	<head>
+		<title>Background Image Example</title>
+		<style>
+			body {
+				background-image: url("biology.jpg");
+				background-size: contain;
+			}
+	
+</style>
+</head>
+<body>
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Save and Open Files Example</title>
+		<script>
+			function saveTextAsFile() {
+				var textToSave = document.getElementById("myTextarea").value;
+				var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+				var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+				var fileNameToSaveAs = "myTextFile.txt";
+	 
+				var downloadLink = document.createElement("a");
+				downloadLink.download = fileNameToSaveAs;
+				downloadLink.innerHTML = "Download File";
+				downloadLink.href = textToSaveAsURL;
+				downloadLink.onclick = destroyClickedElement;
+				downloadLink.style.display = "none";
+				document.body.appendChild(downloadLink);
+	 
+				downloadLink.click();
+			}
+	 
+			function destroyClickedElement(event) {
+				document.body.removeChild(event.target);
+			}
+	 
+			function loadFileAsText() {
+				var fileToLoad = document.getElementById("fileToLoad").files[0];
+				var fileReader = new FileReader();
+				fileReader.onload = function(fileLoadedEvent) {
+					var textFromFileLoaded = fileLoadedEvent.target.result;
+					document.getElementById("myTextarea").value = textFromFileLoaded;
+				};
+				fileReader.readAsText(fileToLoad, "UTF-8");
+			}
+		</script>
+	</head>
+	<body>
+		<textarea id="myTextarea" rows="10" cols="50"></textarea><br><br>
+		<button onclick="saveTextAsFile()">Save Text as File</button><br><br>
+		<input type="file" id="fileToLoad"><br><br>
+		<button onclick="loadFileAsText()">Load File</button>
+	</body>
+	</html>
+	<!DOCTYPE html>
+<html>
+<head>
+
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>QR Code Reader Example</title>
+		<script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+	</head>
+	<body>
+		<h1>QR Code Reader</h1>
+		<video id="video" width="400" height="300" style="border: 1px solid gray;"></video>
+		<p id="result"></p>
+	
+		<script>
+			const video = document.getElementById('video');
+			const resultContainer = document.getElementById('result');
+	
+			function startQRCodeReader() {
+				navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+					.then(function(stream) {
+						video.srcObject = stream;
+						video.play();
+						requestAnimationFrame(tick);
+					})
+					.catch(function(err) {
+						console.error('Error accessing camera:', err);
+					});
+			}
+	
+			function tick() {
+				if (video.readyState === video.HAVE_ENOUGH_DATA) {
+					const canvasElement = document.createElement('canvas');
+					canvasElement.setAttribute('width', video.videoWidth);
+					canvasElement.setAttribute('height', video.videoHeight);
+					const canvas = canvasElement.getContext('2d');
+					canvas.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+					const imageData = canvas.getImageData(0, 0, video.videoWidth, video.videoHeight);
+					const code = jsQR(imageData.data, imageData.width, imageData.height, {
+						inversionAttempts: 'dontInvert',
+					});
+					if (code) {
+						resultContainer.innerText = code.data;
+					}
+				}
+				requestAnimationFrame(tick);
+			}
+	
+			startQRCodeReader();
+		</script>
+	</body>
+	</html>
+	
+
+	<!DOCTYPE html>
+<html>
+<head>
+	<title>QR Code Reader Example</title>
+	<script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+</head>
+<body>
+	<h1>QR Code Reader</h1>
+	<input type="file" id="fileInput">
+	<button onclick="decodeQRCode()">Decode QR Code</button>
+	<p id="result"></p>
+
+	<script>
+		function decodeQRCode() {
+			const fileInput = document.getElementById('fileInput');
+			const resultContainer = document.getElementById('result');
+
+			const file = fileInput.files[0];
+			const reader = new FileReader();
+
+			reader.onload = function(event) {
+				const image = new Image();
+				image.src = event.target.result;
+
+				image.onload = function() {
+					const canvasElement = document.createElement('canvas');
+					canvasElement.width = image.width;
+					canvasElement.height = image.height;
+					const canvas = canvasElement.getContext('2d');
+					canvas.drawImage(image, 0, 0, image.width, image.height);
+					const imageData = canvas.getImageData(0, 0, image.width, image.height);
+					const code = jsQR(imageData.data, imageData.width, imageData.height, {
+						inversionAttempts: 'dontInvert',
+					});
+					if (code) {
+						resultContainer.innerText = code.data;
+					} else {
+						resultContainer.innerText = 'No QR code found.';
+					}
+				};
+			};
+
+			reader.readAsDataURL(file);
+		}
+	</script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>QR Code Reader Example</title>
+	<script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+</head>
+<body>
+	<h1>QR Code Reader</h1>
+	<input type="file" id="fileInput">
+	<button onclick="decodeQRCode()">Decode QR Code</button>
+	<p id="result"></p>
+
+	<script>
+		function decodeQRCode() {
+			const fileInput = document.getElementById('fileInput');
+			const resultContainer = document.getElementById('result');
+
+			const file = fileInput.files[0];
+			const reader = new FileReader();
+
+			reader.onload = function(event) {
+				const image = new Image();
+				image.src = event.target.result;
+
+				image.onload = function() {
+					const canvasElement = document.createElement('canvas');
+					canvasElement.width = image.width;
+					canvasElement.height = image.height;
+					const canvas = canvasElement.getContext('2d');
+					canvas.drawImage(image, 0, 0, image.width, image.height);
+					const imageData = canvas.getImageData(0, 0, image.width, image.height);
+					const code = jsQR(imageData.data, imageData.width, imageData.height, {
+						inversionAttempts: 'dontInvert',
+					});
+					if (code) {
+						resultContainer.innerText = code.data;
+
+						// Send the QR code data to the server for database insertion
+						const xhr = new XMLHttpRequest();
+						xhr.open('POST', 'store_qrcode.php', true);
+						xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+						xhr.onreadystatechange = function() {
+							if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+								console.log(xhr.responseText);
+							}
+						};
+						xhr.send('qrcode=' + encodeURIComponent(code.data));
+					} else {
+						resultContainer.innerText = 'No QR code found.';
+					}
+				};
+			};
+
+			reader.readAsDataURL(file);
+		}
+	</script>
+</body>
+</html>
